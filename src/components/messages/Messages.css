@@ -1,5 +1,15 @@
 .Messages {
-    display: flex;
-    flex-flow: column wrap;
-    align-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+Li {
+  margin-top: 10px;
+  border: black solid 2px;
+  background-color: white;
+  padding-bottom: 2px;
+  list-style: none;
+}
+.NewMessage {
+  padding-top: 10px;
 }
