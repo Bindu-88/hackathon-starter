@@ -1,4 +1,5 @@
-import React from "react";import { withAsyncAction } from "../../redux/HOCs";
+import React from "react";
+import { withAsyncAction } from "../../redux/HOCs";
 import "./Messages.css";
 import Button from "react-bootstrap/Button";
 
@@ -29,9 +30,8 @@ class Messages extends React.Component {
   };
 
   newMessageHandler = () => {
-    
     let text = this.state.message;
-    console.log(this.state.message)
+    console.log(this.state.message);
     this.props.createMessage(text).then(() => {
       this.fetchMessages();
       this.setState({
@@ -42,22 +42,21 @@ class Messages extends React.Component {
 
   newLikeHandler = (messageId) => {
     this.props.addLike(messageId).then(() => {
-      this.fetchMessages()
+      this.fetchMessages();
     });
   };
 
   newDislikeHandler = (likeId) => {
     this.props.removeLike(likeId).then(() => {
-      this.fetchMessages()
+      this.fetchMessages();
     });
   };
 
   delMessageHandler = (messageId) => {
     this.props.deleteMessage(messageId).then(() => {
-      this.fetchMessages()
+      this.fetchMessages();
     });
   };
-
 
   handleChange = (event) => {
     let data = { ...this.state };
@@ -74,10 +73,19 @@ class Messages extends React.Component {
         
         return (
           <li key={value.id}>
-            {value.text} 
-            <button onClick={() => this.newLikeHandler(value.id)}>Like</button>
-            <button onClick={() => this.newDislikeHandler(value.likes[0].id)}>Dislike</button>
-            <button onClick={() => this.delMessageHandler(value.id)}>Delete</button>
+            {value.text}{" "}
+            {value.likes.length === 0 ? (
+              <button onClick={() => this.newLikeHandler(value.id)}>
+                Like
+              </button>
+            ) : (
+              <button onClick={() => this.newDislikeHandler(value.likes[0].id)}>
+                Dislike
+              </button>
+            )}
+            <button onClick={() => this.delMessageHandler(value.id)}>
+              Delete
+            </button>
           </li>
         );
       });
