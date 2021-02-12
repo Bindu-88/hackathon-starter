@@ -30,7 +30,9 @@ class Messages extends React.Component {
   };
 
   newMessageHandler = () => {
+    
     let text = this.state.message;
+    console.log(this.state.message)
     this.props.createMessage(text).then(() => {
       this.fetchMessages();
       this.setState({
@@ -39,13 +41,12 @@ class Messages extends React.Component {
     });
   };
 
-  newLikeHandler = () => {
-    let messageId = this.state.message;
+  newLikeHandler = (messageId) => {
     this.props.addLike(messageId).then(() => {
-      this.fetchMessages();
+      this.fetchMessages()
     });
   };
-
+// Tried messageId.likes.push('blah') or integer .. messageId is the object, right? likes is the array/property according to console.log(value)
   handleChange = (event) => {
     let data = { ...this.state };
 
@@ -58,18 +59,15 @@ class Messages extends React.Component {
     let display = <div>No Messages Found</div>;
     if (this.state.messages) {
       display = this.state.messages.map((value) => {
-        console.log(value);
+        console.log("value " , value);
         return (
-          (<li key={value.id}>{value.text}</li>),
-          (
-            <button key={value.id} onClick={this.newLikeHandler}>
-              Like
-            </button>
-          )
+          <li key={value.id}>
+            {value.text} <button onClick={() => this.newLikeHandler(value.id)}>Like</button>
+          </li>
         );
       });
     }
-
+// Adding this to <button> key={value.id} onChange={this.handleChange} :: Fail
     return (
       <div className="Messages">
         <div className="ListMessage">{display}</div>
