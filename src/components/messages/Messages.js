@@ -71,13 +71,12 @@ class Messages extends React.Component {
     let display = <div>No Messages Found</div>;
     if (this.state.messages) {
       display = this.state.messages.map((value) => {
-        console.log("value " , value.likes && value.likes.id ? value.likes.id : 'nothing');
-        let likeId = value.likes && value.likes.id
+        
         return (
           <li key={value.id}>
             {value.text} 
             <button onClick={() => this.newLikeHandler(value.id)}>Like</button>
-            <button onClick={() => this.newDislikeHandler(likeId)}>Dislike</button>
+            <button onClick={() => this.newDislikeHandler(value.likes[0].id)}>Dislike</button>
             <button onClick={() => this.delMessageHandler(value.id)}>Delete</button>
           </li>
         );
