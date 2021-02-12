@@ -75,17 +75,17 @@ class Messages extends React.Component {
           <li key={value.id}>
             {value.text}{" "}
             {value.likes.length === 0 ? (
-              <button onClick={() => this.newLikeHandler(value.id)}>
+              <Button variant="success" size="sm" onClick={() => this.newLikeHandler(value.id)}>
                 Like
-              </button>
+              </Button> 
             ) : (
-              <button onClick={() => this.newDislikeHandler(value.likes[0].id)}>
+              <Button variant="outline-danger" size="sm" onClick={() => this.newDislikeHandler(value.likes[0].id)}>
                 Dislike
-              </button>
+              </Button>
             )}
-            <button onClick={() => this.delMessageHandler(value.id)}>
+            <Button variant="danger" size="sm" onClick={() => this.delMessageHandler(value.id)}>
               Delete
-            </button>
+            </Button>
           </li>
         );
       });
@@ -100,7 +100,7 @@ class Messages extends React.Component {
             onChange={this.handleChange}
             value={this.state.message}
           />
-          <Button variant="primary" onClick={this.newMessageHandler}>
+          <Button variant="primary" size="sm" onClick={this.newMessageHandler}>
             {" "}
             Send Message{" "}
           </Button>
