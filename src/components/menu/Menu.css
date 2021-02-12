@@ -14,7 +14,7 @@
 
 #menu-links a {
   padding-right: 0.5em;
-  color: darkblue;
-  text-decoration: underline;
+  color: white;
+  text-decoration: none;
   cursor: pointer;
 }
