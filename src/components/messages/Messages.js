@@ -30,9 +30,8 @@ class Messages extends React.Component {
   };
 
   newMessageHandler = () => {
-    
     let text = this.state.message;
-    console.log(this.state.message)
+    console.log(this.state.message);
     this.props.createMessage(text).then(() => {
       this.fetchMessages();
       this.setState({
@@ -43,10 +42,22 @@ class Messages extends React.Component {
 
   newLikeHandler = (messageId) => {
     this.props.addLike(messageId).then(() => {
-      this.fetchMessages()
+      this.fetchMessages();
     });
   };
-// Tried messageId.likes.push('blah') or integer .. messageId is the object, right? likes is the array/property according to console.log(value)
+
+  newDislikeHandler = (likeId) => {
+    this.props.removeLike(likeId).then(() => {
+      this.fetchMessages();
+    });
+  };
+
+  delMessageHandler = (messageId) => {
+    this.props.deleteMessage(messageId).then(() => {
+      this.fetchMessages();
+    });
+  };
+
   handleChange = (event) => {
     let data = { ...this.state };
 
@@ -59,15 +70,27 @@ class Messages extends React.Component {
     let display = <div>No Messages Found</div>;
     if (this.state.messages) {
       display = this.state.messages.map((value) => {
-        console.log("value " , value);
+        
         return (
           <li key={value.id}>
-            {value.text} <button onClick={() => this.newLikeHandler(value.id)}>Like</button>
+            {value.text}{" "}
+            {value.likes.length === 0 ? (
+              <button onClick={() => this.newLikeHandler(value.id)}>
+                Like
+              </button>
+            ) : (
+              <button onClick={() => this.newDislikeHandler(value.likes[0].id)}>
+                Dislike
+              </button>
+            )}
+            <button onClick={() => this.delMessageHandler(value.id)}>
+              Delete
+            </button>
           </li>
         );
       });
     }
-// Adding this to <button> key={value.id} onChange={this.handleChange} :: Fail
+
     return (
       <div className="Messages">
         <div className="ListMessage">{display}</div>
