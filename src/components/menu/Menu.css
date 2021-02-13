@@ -6,10 +6,15 @@
   padding: 0 1em;
   border-radius: 1em;
 }
+.Menu h1 {
+  background-color: lightskyblue;
+  margin: auto;
+}
 
 #menu-links {
   display: flex;
   padding-left: 1em;
+  background-color: lightskyblue;
 }
 
 #menu-links a {
